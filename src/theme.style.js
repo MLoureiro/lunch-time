@@ -25,22 +25,30 @@ const header = {
 };
 
 const form = {
+  font: general.font,
+  color: {
+    text: general.color.text,
+  },
   input: {
     color: {
       background: colors.white,
       border: colors.iron,
     },
-    font: {
-      size: general.font.size,
-    },
     border: {
       thickness: '1px',
       radius: '3px',
+    },
+    font: {
+      size: general.font.size,
     },
     padding: '.25em 1em',
     height: '1.5em',
   },
   button: {
+    border: {
+      thickness: '1px',
+      radius: '3px',
+    },
     color: {
       background: colors.white,
       border: colors.iron,
@@ -56,11 +64,26 @@ const form = {
         text: colors.white,
       },
     },
-    border: {
-      thickness: '1px',
-      radius: '3px',
+    font: {
+      size: '1em',
+      weight: 'bold',
     },
-    padding: '.5em 1em 0',
+    size: {
+      large: {
+        padding: '1.5em 2em',
+        font: { size: '1.2em' },
+      },
+      small: {
+        padding: '.25em .5em',
+        font: { size: '1em' },
+      },
+      tiny: {
+        padding: '0 0.25em',
+        font: { size: '.8em' },
+      },
+    },
+    margin: '1em',
+    padding: '.5em 1em',
     height: '1.5em',
   },
 };

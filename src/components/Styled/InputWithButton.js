@@ -7,9 +7,7 @@ const Wrapper = styled.span`
   align-items: center;
 `;
 
-const InlineInput = styled.input.attrs({
-  type: ({ type }) => (type || 'text'),
-})`
+const InlineInput = styled.input`
   display: inline-block;
   background: ${({ theme }) => theme.form.input.color.background};
   height: ${({ theme }) => theme.form.input.height};
