@@ -18,7 +18,7 @@ const Logo = styled.img`
   height: 40px;
   margin: 0 10px;
   padding: 5px;
-  border-radius: 10px; 
+  border-radius: 10px;
   border: 1px solid #666666;
 `;
 
