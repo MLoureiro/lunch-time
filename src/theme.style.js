@@ -10,7 +10,7 @@ const colors = {
 
 const general = {
   color: {
-    background: colors.white,
+    background: colors.babyBlue,
     text: colors.neptune,
   },
   font: {
@@ -88,4 +88,18 @@ const form = {
   },
 };
 
-export default { general, header, form };
+const modal = {
+  content: {
+    border: {
+      thickness: '1px',
+      radius: '3px',
+    },
+    color: {
+      background: colors.babyBlue,
+      border: colors.iron,
+    },
+    padding: '1.5em',
+  },
+};
+
+export default { general, header, form, modal };
