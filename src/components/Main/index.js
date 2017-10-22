@@ -1,20 +1,7 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import Rebase from 're-base';
-import RestaurantManager from './RestaurantManager';
-import { Button } from './Styled/Button';
-import { Firebase } from '../services/firebase';
-import { Modal } from './Styled/Modal';
-
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const ChosenRestaurant = styled.h1`
-  font-size: 5em;
-`;
+import Main from './Main';
+import { Firebase } from '../../services/firebase';
 
 function makeChosenRestaurant(restaurant) {
   return {
@@ -23,7 +10,7 @@ function makeChosenRestaurant(restaurant) {
   };
 }
 
-export default class Main extends Component {
+export default class MainContainer extends Component {
   state = {
     isModalOpen: false,
     chosenRestaurant: null,
@@ -102,32 +89,17 @@ export default class Main extends Component {
   }
 
   render() {
+    const restaurant = this.state.chosenRestaurant
+      ? this.state.chosenRestaurant.restaurant
+      : null;
     return (
-      <Wrapper>
-        {this.state.chosenRestaurant &&
-          <ChosenRestaurant>
-            {this.state.chosenRestaurant.restaurant.name}
-          </ChosenRestaurant>
-        }
-        <Button
-          primary
-          onClick={() => this.randomizeRestaurant()}
-        >
-          Randomize
-        </Button>
-        <Button
-          tiny
-          onClick={() => this.handleOpenModal()}
-        >
-          Manage Restaurants
-        </Button>
-        <Modal
-          isOpen={this.state.isModalOpen}
-          onRequestClose={() => this.handleCloseModal()}
-        >
-          <RestaurantManager />
-        </Modal>
-      </Wrapper>
+      <Main
+        restaurant={restaurant}
+        isModalOpen={this.state.isModalOpen}
+        onModalOpen={() => this.handleOpenModal()}
+        onModalClose={() => this.handleCloseModal()}
+        onRandomize={() => this.randomizeRestaurant()}
+      />
     );
   }
 }
