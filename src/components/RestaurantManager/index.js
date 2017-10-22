@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Rebase from 're-base';
-import { Firebase } from '../../services/firebase';
+import base from '../../services/rebase';
 import RestaurantManager from './RestaurantManager';
 
 function generateRestaurantIdFromName(name) {
@@ -25,7 +24,6 @@ export default class RestaurantManagerContainer extends Component {
   };
 
   componentWillMount() {
-    const base = Rebase.createClass(Firebase.app().database());
     base.syncState(`restaurants`, {
       context: this,
       state: 'restaurantList',

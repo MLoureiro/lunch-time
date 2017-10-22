@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Rebase from 're-base';
 import Main from './Main';
-import { Firebase } from '../../services/firebase';
+import base from '../../services/rebase';
 
 function makeChosenRestaurant(restaurant) {
   return {
@@ -18,7 +17,6 @@ export default class MainContainer extends Component {
   };
 
   componentWillMount() {
-    const base = Rebase.createClass(Firebase.app().database());
     base.listenTo('chosenRestaurants', {
       context: this,
       state: 'chosenRestaurant',
@@ -62,11 +60,9 @@ export default class MainContainer extends Component {
       chosen = this.getRandomRestaurant();
     } while (!this.isNewRestaurant(chosen));
 
-    Rebase
-      .createClass(Firebase.app().database())
-      .push('chosenRestaurants', {
-        data: makeChosenRestaurant(chosen),
-      });
+    base.push('chosenRestaurants', {
+      data: makeChosenRestaurant(chosen),
+    });
   }
 
   canRandomizeRestaurants() {
