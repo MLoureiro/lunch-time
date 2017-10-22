@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Button } from './Styled/Button';
-import { Modal } from './Styled/Modal';
+import Rebase from 're-base';
 import RestaurantManager from './RestaurantManager';
-
-const SPACE = '\u00A0';
+import { Button } from './Styled/Button';
+import { Firebase } from '../services/firebase';
+import { Modal } from './Styled/Modal';
 
 const Wrapper = styled.section`
   display: flex;
@@ -16,18 +16,46 @@ const ChosenRestaurant = styled.h1`
   font-size: 5em;
 `;
 
+function makeChosenRestaurant(restaurant) {
+  return {
+    restaurant,
+    createdAt: Date.now(),
+  };
+}
+
 export default class Main extends Component {
   state = {
     isModalOpen: false,
     chosenRestaurant: null,
+    restaurantList: [],
   };
-  restaurantList = [
-    'Vapiano',
-    'Burgermeester',
-    'Tasty Burgers',
-    'Ter & Marsh Co.',
-    'Poke Perfect',
-  ];
+
+  componentWillMount() {
+    const base = Rebase.createClass(Firebase.app().database());
+    base.listenTo('chosenRestaurants', {
+      context: this,
+      state: 'chosenRestaurant',
+      asArray: true,
+      queries: {
+        limitToLast: 1,
+        orderByChild: 'createdAt',
+      },
+      then: function(chosenRestaurant) {
+        const today = new Date();
+        const todayTimestamp = (new Date(today.getFullYear(), today.getMonth(), today.getDay())).getTime();
+
+        if (!chosenRestaurant || chosenRestaurant[0].createdAt < todayTimestamp) {
+          return;
+        }
+
+        this.setState({ chosenRestaurant: chosenRestaurant[0] });
+      }
+    });
+    base.bindToState('restaurants', {
+      context: this,
+      state: 'restaurantList',
+    });
+  }
 
   handleOpenModal() {
     this.setState({ isModalOpen: true });
@@ -38,16 +66,49 @@ export default class Main extends Component {
   }
 
   randomizeRestaurant() {
-    const random = Math.floor(Math.random() * this.restaurantList.length);
-    this.setState({ chosenRestaurant: this.restaurantList[random] })
+    if (!this.canRandomizeRestaurants()) {
+      return;
+    }
+
+    let chosen = null;
+    do {
+      chosen = this.getRandomRestaurant();
+    } while (!this.isNewRestaurant(chosen));
+
+    Rebase
+      .createClass(Firebase.app().database())
+      .push('chosenRestaurants', {
+        data: makeChosenRestaurant(chosen),
+      });
+  }
+
+  canRandomizeRestaurants() {
+    const { restaurantList, chosenRestaurant } = this.state;
+
+    return restaurantList.length > 1
+      || (chosenRestaurant === null && restaurantList.length === 1);
+  }
+
+  isNewRestaurant({ id }) {
+    return !this.state.chosenRestaurant
+      || this.state.chosenRestaurant.restaurant.id !== id;
+  }
+
+  getRandomRestaurant() {
+    const { restaurantList } = this.state;
+    const position = Math.floor(Math.random() * restaurantList.length);
+
+    return restaurantList[position];
   }
 
   render() {
     return (
       <Wrapper>
-        <ChosenRestaurant>
-          {this.state.chosenRestaurant || SPACE}
-        </ChosenRestaurant>
+        {this.state.chosenRestaurant &&
+          <ChosenRestaurant>
+            {this.state.chosenRestaurant.restaurant.name}
+          </ChosenRestaurant>
+        }
         <Button
           primary
           onClick={() => this.randomizeRestaurant()}
