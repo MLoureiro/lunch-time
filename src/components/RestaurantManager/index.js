@@ -1,31 +1,60 @@
 import React, { Component } from 'react';
+import Rebase from 're-base';
+import { Firebase } from '../../services/firebase';
 import RestaurantManager from './RestaurantManager';
+
+function generateRestaurantIdFromName(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/(^-)?(-$)?/g, '');
+}
+
+function makeNewRestaurantFromName(name) {
+  const id = generateRestaurantIdFromName(name);
+  return {
+    id: id,
+    name: name,
+    createdAt: Date.now(),
+  };
+}
 
 export default class RestaurantManagerContainer extends Component {
   state = {
-    restaurantList: [
-      'Vapiano',
-      'Burgermeester',
-      'Tasty Burgers',
-      'Ter & Marsh Co.',
-      'Poke Perfect',
-    ]
+    restaurantList: [],
   };
+
+  componentWillMount() {
+    const base = Rebase.createClass(Firebase.app().database());
+    base.syncState(`restaurants`, {
+      context: this,
+      state: 'restaurantList',
+      asArray: true,
+    });
+  }
 
   addRestaurant(restaurant) {
     if (!restaurant) {
       return false;
     }
-    const list = this.state.restaurantList;
-    const upperCase = list.map(x => (x.toUpperCase ?  x.toUpperCase() : x));
+    const newRestaurant = makeNewRestaurantFromName(restaurant);
+    const idList = this.state.restaurantList.map(restaurant => (restaurant.id));
 
-    if (upperCase.includes(restaurant.toUpperCase())) {
-      return false
+    if (idList.includes(newRestaurant.id)) {
+      return false;
     }
 
-    this.setState({ restaurantList: [...list, restaurant] });
+    this.setState(({ restaurantList }) => ({
+      restaurantList: [...restaurantList, newRestaurant]
+    }));
 
     return true;
+  }
+
+  removeRestaurant({ id }) {
+    this.setState(({ restaurantList }) => ({
+      restaurantList: restaurantList.filter(restaurant => restaurant.id !== id)
+    }));
   }
 
   render() {
@@ -33,6 +62,7 @@ export default class RestaurantManagerContainer extends Component {
       <RestaurantManager
         restaurants={this.state.restaurantList}
         onAdd={restaurant => this.addRestaurant(restaurant)}
+        onRemove={restaurant => this.removeRestaurant(restaurant)}
       />
     )
   }
