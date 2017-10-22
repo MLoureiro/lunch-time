@@ -1,6 +1,7 @@
 {
   "name": "lunch-time",
   "version": "0.1.0",
+  "homepage": "https://mloureiro.github.io/lunch-time",
   "private": true,
   "dependencies": {
     "firebase": "^4.6.0",
