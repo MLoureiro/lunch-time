@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button`
   background-color: ${({ theme }) => theme.form.button.color.background};
-  margin: 0;
   margin: ${({ theme }) => theme.form.button.margin};
   padding: ${({ theme }) => theme.form.button.padding};
   border:
@@ -64,8 +63,8 @@ function Button(props) {
   return (
     <StyledButton
       className={`${getStyleClassName(props)} ${getSizeClassName(props)}`}
-      type={props.type}
       onClick={(event) => props.onClick(event)}
+      {...props}
     >
       {props.children}
     </StyledButton>

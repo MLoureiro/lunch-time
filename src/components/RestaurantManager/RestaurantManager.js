@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { InputWithButton } from '../Styled/InputWithButton';
+import { Button } from '../Styled/Button';
 
 const List = styled.ul`
   list-style: none;
@@ -10,6 +11,9 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 5px;
   
   &:first-child{
@@ -27,12 +31,12 @@ const ListItem = styled.li`
   }
 `;
 
-const DeleteButton = styled.button.attrs({
+const DeleteButton = styled(Button).attrs({
   children: 'X',
   type: 'button',
 })`
-  float: right;
-  border: 1px solid #ccc;
+  margin: 0;
+  padding: .25em .5em;
   border-radius: 50%;
   font-weight: bolder;
   color: #C10000;
