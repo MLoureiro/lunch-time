@@ -27,7 +27,13 @@ export default class MainContainer extends Component {
       },
       then: function(chosenRestaurant) {
         const today = new Date();
-        const todayTimestamp = (new Date(today.getFullYear(), today.getMonth(), today.getDay())).getTime();
+        const todayTimestamp = (
+          new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate(),
+            0,0,1,
+          )).getTime();
 
         if (!chosenRestaurant || chosenRestaurant[0].createdAt < todayTimestamp) {
           return;
