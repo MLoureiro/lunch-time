@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import Header from './components/Header';
-import Main from './components/Main/index';
+import LandingPage from './pages/LandingPage';
 import registerServiceWorker from './registerServiceWorker';
 import theme from './theme.style';
 import './index.css';
@@ -20,8 +19,7 @@ class App extends Component {
   render() {
     return (
       <AppWrapper>
-        <Header />
-        <Main />
+        <Route exact path="/" component={LandingPage} />
       </AppWrapper>
     );
   }

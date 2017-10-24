@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Main from './Main';
-import base from '../../services/rebase';
+import base from '../../../../services/rebase';
 
 function makeChosenRestaurant(restaurant) {
   return {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import base from '../../services/rebase';
+import base from '../../../../services/rebase';
 import RestaurantManager from './RestaurantManager';
 
 function generateRestaurantIdFromName(name) {

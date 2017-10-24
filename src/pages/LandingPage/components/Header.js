@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 
 const images = {
-    logo: require('./images/logo.svg')
+    logo: require('../../../components/images/logo.svg')
 };
 
 const Wrapper = styled.section`
