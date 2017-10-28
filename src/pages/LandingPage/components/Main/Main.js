@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import RestaurantManager from '../RestaurantManager';
-import { Button } from '../Styled/Button';
-import { Modal } from '../Styled/Modal';
+import RestaurantManager from '../RestaurantManager/index';
+import { Button } from '../../../../components/Styled/Button';
+import { Modal } from '../../../../components/Styled/Modal';
 
 const Wrapper = styled.section`
   display: flex;

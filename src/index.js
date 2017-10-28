@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import Header from './components/Header';
-import Main from './components/Main/index';
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
 import registerServiceWorker from './registerServiceWorker';
 import theme from './theme.style';
+import { auth, isAuthenticated, userIdManager } from './services/auth/user';
 import './index.css';
 
 const AppWrapper = styled.section`
@@ -16,12 +17,61 @@ const AppWrapper = styled.section`
   font-size: ${({ theme }) => theme.general.font.size};
 `;
 
+function RouteOnlyAuthenticated({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={renderProps => (
+        isAuthenticated() ? (
+          <Component />
+        ) : (
+          <Redirect to="/login" />
+        )
+      )}
+    />
+  );
+}
+
+function LoginRoute () {
+  return (
+    <Route
+      exact
+      path="/login"
+      render={renderProps => (
+        !isAuthenticated() ? (
+          <LoginPage />
+        ) : (
+          <Redirect to="/" />
+        )
+      )}
+    />
+  )
+}
+
 class App extends Component {
+  state = { uid: null };
+
+  componentDidMount() {
+    this.setState({ uid: userIdManager.get() });
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        userIdManager.set(user);
+        this.setState({ uid: user.uid });
+      } else {
+        userIdManager.remove(user);
+        this.setState({ uid: null });
+      }
+    });
+  }
+
   render() {
     return (
       <AppWrapper>
-        <Header />
-        <Main />
+        <Switch>
+          <RouteOnlyAuthenticated exact path="/" component={LandingPage} />
+          <LoginRoute />
+          <Redirect to="/" />
+        </Switch>
       </AppWrapper>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { InputWithButton } from '../Styled/InputWithButton';
-import { Button } from '../Styled/Button';
+import { InputWithButton } from '../../../../components/Styled/InputWithButton';
+import { Button } from '../../../../components/Styled/Button';
 
 const List = styled.ul`
   list-style: none;
