@@ -55,7 +55,7 @@ class App extends Component {
     this.setState({ uid: userIdManager.get() });
     auth.onAuthStateChanged((user) => {
       if (user) {
-        userIdManager.set(user);
+        userIdManager.set(user.uid);
         this.setState({ uid: user.uid });
       } else {
         userIdManager.remove(user);
