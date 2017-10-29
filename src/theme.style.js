@@ -10,6 +10,7 @@ const colors = {
   base: {
     normal: '#eeeeee',
     dark: '#d4dde4',
+    text: '#000000',
   },
   primary: {
     normal: '#90caf9',
@@ -27,14 +28,22 @@ const colors = {
 
 const general = {
   color: {
-    background: colors.babyBlue,
-    text: colors.neptune,
+    background: colors.base.normal,
+    sheet: colors.white,
+    text: colors.base.text,
   },
   font: {
     family: 'Comfortaa, cursive',
     size: '16px',
   },
 };
+
+const header = {
+  color: {
+    background: colors.primary.dark,
+  }
+};
+
 
 const button = {
   border: {
@@ -76,13 +85,6 @@ const button = {
     family: general.font.family,
   },
 };
-
-const header = {
-  color: {
-    background: colors.pinkPearl,
-  }
-};
-
 const form = {
   font: general.font,
   color: {

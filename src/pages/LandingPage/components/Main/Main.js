@@ -6,8 +6,11 @@ import { Modal } from '../../../../components/Styled/Modal';
 
 const Wrapper = styled.section`
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
+  border-radius: 2px;
+  background-color: ${({ theme }) => (theme.general.color.sheet)};
 `;
 
 const ChosenRestaurant = styled.h1`
