@@ -6,6 +6,19 @@ const colors = {
   iron: '#cccccc',
   gunPowder: '#474551',
   comet: '#636172',
+
+  primary: {
+    normal: '#90caf9',
+    light: '#c3fdff',
+    dark: '#5d99c6',
+    text: '#000000',
+  },
+  secondary: {
+    normal: '#455a64',
+    light: '#718792',
+    dark: '#1c313a',
+    text: '#ffffff',
+  },
 };
 
 const general = {
@@ -16,7 +29,43 @@ const general = {
   font: {
     family: 'Comfortaa, cursive',
     size: '16px',
-  }
+  },
+};
+
+const button = {
+  border: {
+    thickness: '1px',
+    radius: '3px',
+  },
+  color: {
+    primary: {
+      normal: colors.primary.normal,
+      active: colors.primary.dark,
+      text: colors.primary.text,
+    },
+    secondary: {
+      normal: colors.secondary.normal,
+      active: colors.secondary.light,
+      text: colors.secondary.text,
+    },
+    background: colors.white,
+    border: colors.iron,
+    text: colors.neptune,
+    hover: {
+      background: colors.gunPowder,
+      border: colors.gunPowder,
+      text: colors.white,
+    },
+    active: {
+      background: colors.comet,
+      border: colors.gunPowder,
+      text: colors.white,
+    },
+  },
+  font: {
+    size: general.font.size,
+    family: general.font.family,
+  },
 };
 
 const header = {
@@ -104,4 +153,4 @@ const modal = {
   },
 };
 
-export default { general, header, form, modal };
+export default { general, header, button, form, modal };
