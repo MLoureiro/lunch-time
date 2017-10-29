@@ -2,33 +2,32 @@ import React from 'react';
 import styled from 'styled-components'
 
 const images = {
-    logo: require('../../../components/images/logo.svg')
+  logo: require('../../../components/images/logo.svg')
 };
 
 const Wrapper = styled.section`
-  height: 70px;
-  width: 100%;
-  background: ${({ theme }) => theme.header.color.background};
   display: flex;
+  height: 40px;
+  width: 100%;
   align-items: center;
+  justify-content: flex-end;
 `;
 
 const Logo = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   margin: 0 10px;
-  padding: 5px;
-  border-radius: 10px;
-  border: 1px solid #666666;
 `;
 
 const BrandName = styled.h1`
   color: #666666;
-  font-size: 32px;
+  font-size: 1em;
   font-weight: normal;
+  font-family: 'Pacifico', cursive;
+  margin-right: 1em;
 `;
 
-export default function Header() {
+export default function Footer() {
   return (
     <Wrapper>
       <Logo src={images.logo} />

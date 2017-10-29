@@ -14,6 +14,7 @@ const AppWrapper = styled.section`
   width: 100%;
   color: ${({ theme }) => theme.general.color.text};
   background-color: ${({ theme }) => theme.general.color.background};
+  font-family: ${({ theme }) => theme.general.font.family};
   font-size: ${({ theme }) => theme.general.font.size};
 `;
 

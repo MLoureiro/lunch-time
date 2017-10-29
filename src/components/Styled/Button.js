@@ -3,60 +3,78 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background-color: ${({ theme }) => theme.form.button.color.background};
-  margin: ${({ theme }) => theme.form.button.margin};
-  padding: ${({ theme }) => theme.form.button.padding};
-  border:
-    ${({ theme }) => theme.form.button.border.thickness}
-    solid
-    ${({ theme }) => theme.form.button.color.border};
-  border-radius: ${({ theme }) => theme.form.button.border.radius};
-  font-weight: ${({ theme }) => theme.form.button.font.weight};
-  font-size: ${({ theme }) => theme.form.button.font.size};
+  font-size: ${({ theme }) => theme.button.font.size};
+  font-family: ${({ theme }) => theme.button.font.family};
+
+  display: inline-flex;
+  position: relative;
+  justify-content: center;
+  overflow: hidden;
+
+  padding: .2em 1em;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  box-shadow: 
+    0 3px 1px -2px rgba(0,0,0,.2),
+    0 2px 2px 0 rgba(0,0,0,.14),
+    0 1px 5px 0 rgba(0,0,0,.12);
+
+  letter-spacing: .04em;
+  line-height: 1.5em;
+  
+  background-color: ${({ theme }) => theme.button.color.default.normal};
+  color: ${({ theme }) => theme.button.color.default.text};
+
+  &:active { background-color: ${({ theme }) => theme.button.color.default.active}; }
+
+  &.primary {
+    background-color: ${({ theme }) => theme.button.color.primary.normal};
+    color: ${({ theme }) => theme.button.color.primary.text};
+  
+    &:active { background-color: ${({ theme }) => theme.button.color.primary.active}; }
+  }
+
+  &.secondary {
+    background-color: ${({ theme }) => theme.button.color.secondary.normal};
+    color: ${({ theme }) => theme.button.color.secondary.text};
+
+    &:active { background-color: ${({ theme }) => theme.button.color.secondary.active}; }
+  }
 
   &.large {
-    padding: ${({ theme }) => theme.form.button.size.large.padding};
-    font-size: ${({ theme }) => theme.form.button.size.large.font.size};
+    padding: .5em 1.2em;
   }
+
   &.small {
-    padding: ${({ theme }) => theme.form.button.size.small.padding};
-    font-size: ${({ theme }) => theme.form.button.size.small.font.size};
+    padding: 0 .3em;
   }
+
   &.tiny {
-    padding: ${({ theme }) => theme.form.button.size.tiny.padding};
-    font-size: ${({ theme }) => theme.form.button.size.tiny.font.size};
-  }
-
-  &:hover {
-    color: ${({ theme }) => theme.form.button.color.hover.text};
-    background-color: ${({ theme }) => theme.form.button.color.hover.background};
-    border-color: ${({ theme }) => theme.form.button.color.hover.border};
-  }
-
-  &:active {
-    color: ${({ theme }) => theme.form.button.color.active.text};
-    background-color: ${({ theme }) => theme.form.button.color.active.background};
-    border-color: ${({ theme }) => theme.form.button.color.active.border};
+    font-size: .8em;
+    padding: 0;
   }
 `;
 
-// @TODO handle all button styles
-// (background + text color with hover + active states)
-function getStyleClassName({ primary, success, info, warning, danger, link }) {
+function getStyleClassName({ primary, secondary }) {
   if (primary) return 'primary';
-  if (success) return 'success';
-  if (info) return 'info';
-  if (warning) return 'warning';
-  if (danger) return 'danger';
-  if (link) return 'link';
-  return 'default'
+  if (secondary) return 'secondary';
+  return ''
 }
 
 function getSizeClassName({ large, small, tiny }) {
   if (large) return 'large';
   if (small) return 'small';
   if (tiny) return 'tiny';
-  return 'medium';
+  return '';
 }
 
 function Button(props) {
@@ -74,16 +92,8 @@ function Button(props) {
 Button.propTypes = {
   type: PropTypes.string,
   onClick: PropTypes.func,
-
-  // style
   primary: PropTypes.bool,
-  success: PropTypes.bool,
-  info: PropTypes.bool,
-  warning: PropTypes.bool,
-  danger: PropTypes.bool,
-  link: PropTypes.bool,
-
-  // size
+  secondary: PropTypes.bool,
   large: PropTypes.bool,
   small: PropTypes.bool,
   tiny: PropTypes.bool,
@@ -93,11 +103,8 @@ Button.defaultProps = {
   type: 'button',
   onClick: () => {},
   primary: false,
+  secondary: false,
   success: false,
-  info: false,
-  warning: false,
-  danger: false,
-  link: false,
   large: false,
   small: false,
   tiny: false,
