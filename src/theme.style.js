@@ -14,6 +14,7 @@ const general = {
     text: colors.neptune,
   },
   font: {
+    family: 'Comfortaa, cursive',
     size: '16px',
   }
 };
@@ -67,6 +68,7 @@ const form = {
     font: {
       size: '1em',
       weight: 'bold',
+      family: general.font.family,
     },
     size: {
       large: {

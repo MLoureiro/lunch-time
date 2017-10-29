@@ -26,6 +26,7 @@ const BrandName = styled.h1`
   color: #666666;
   font-size: 32px;
   font-weight: normal;
+  font-family: 'Pacifico', cursive;
 `;
 
 export default function Header() {
