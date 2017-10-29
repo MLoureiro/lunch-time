@@ -6,18 +6,12 @@ const StyledButton = styled.button`
   font-size: ${({ theme }) => theme.button.font.size};
   font-family: ${({ theme }) => theme.button.font.family};
 
-  box-shadow: 
-    0 3px 1px -2px rgba(0,0,0,.2),
-    0 2px 2px 0 rgba(0,0,0,.14),
-    0 1px 5px 0 rgba(0,0,0,.12);
-
-  letter-spacing: .04em;
-  line-height: 1.5em;
-  
-  display: inline-block;
+  display: inline-flex;
   position: relative;
+  justify-content: center;
+  overflow: hidden;
+
   padding: .2em 1em;
-  
   border: none;
   border-radius: 3px;
   outline: none;
@@ -26,9 +20,16 @@ const StyledButton = styled.button`
   text-decoration: none;
   text-transform: uppercase;
   
-  overflow: hidden;
+  cursor: pointer;
   user-select: none;
   box-sizing: border-box;
+  box-shadow: 
+    0 3px 1px -2px rgba(0,0,0,.2),
+    0 2px 2px 0 rgba(0,0,0,.14),
+    0 1px 5px 0 rgba(0,0,0,.12);
+
+  letter-spacing: .04em;
+  line-height: 1.5em;
   
   background-color: ${({ theme }) => theme.button.color.default.normal};
   color: ${({ theme }) => theme.button.color.default.text};

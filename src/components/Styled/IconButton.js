@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Button } from './Button'
 
 const StyledIcon = styled.i.attrs({ 'aria-hidden': true })`
   display: flex;
@@ -9,46 +10,16 @@ const StyledIcon = styled.i.attrs({ 'aria-hidden': true })`
   width: 100%;
 `;
 
-const StyledButton = styled.button`
-  font-size: ${({ theme }) => theme.button.font.size};
-
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  overflow: hidden;
-
+const StyledButton = styled(Button)`
   width: 3em;
   height: 3em;
   padding: 0;
-  border: none;
   border-radius: 50%;
 
-  cursor: pointer;
-  user-select: none;
-  box-sizing: border-box;
   box-shadow: 
     0 3px 5px -1px rgba(0,0,0,.2), 
     0 6px 10px 0 rgba(0,0,0,.14), 
     0 1px 18px 0 rgba(0,0,0,.12);
-
-  background-color: ${({ theme }) => theme.button.color.default.normal};
-  color: ${({ theme }) => theme.button.color.default.text};
-
-  &:active { background-color: ${({ theme }) => theme.button.color.default.active}; }
-
-  &.primary {
-    background-color: ${({ theme }) => theme.button.color.primary.normal};
-    color: ${({ theme }) => theme.button.color.primary.text};
-  
-    &:active { background-color: ${({ theme }) => theme.button.color.primary.active}; }
-  }
-
-  &.secondary {
-    background-color: ${({ theme }) => theme.button.color.secondary.normal};
-    color: ${({ theme }) => theme.button.color.secondary.text};
-  
-    &:active { background-color: ${({ theme }) => theme.button.color.secondary.active}; }
-  }
 
   &.large {
     width: 4em;
