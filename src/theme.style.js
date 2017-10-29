@@ -7,6 +7,10 @@ const colors = {
   gunPowder: '#474551',
   comet: '#636172',
 
+  base: {
+    normal: '#eeeeee',
+    dark: '#d4dde4',
+  },
   primary: {
     normal: '#90caf9',
     light: '#c3fdff',
@@ -38,6 +42,11 @@ const button = {
     radius: '3px',
   },
   color: {
+    default: {
+      normal: colors.base.normal,
+      active: colors.base.dark,
+      text: colors.secondary.normal,
+    },
     primary: {
       normal: colors.primary.normal,
       active: colors.primary.dark,

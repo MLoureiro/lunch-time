@@ -31,20 +31,23 @@ const StyledButton = styled.button`
     0 6px 10px 0 rgba(0,0,0,.14), 
     0 1px 18px 0 rgba(0,0,0,.12);
 
-  background-color: ${({ theme }) => theme.button.color.primary.normal};
-  color: ${({ theme }) => theme.button.color.primary.text};
+  background-color: ${({ theme }) => theme.button.color.default.normal};
+  color: ${({ theme }) => theme.button.color.default.text};
 
-  &:active {
-    background-color: ${({ theme }) => theme.button.color.primary.active};
+  &:active { background-color: ${({ theme }) => theme.button.color.default.active}; }
+
+  &.primary {
+    background-color: ${({ theme }) => theme.button.color.primary.normal};
+    color: ${({ theme }) => theme.button.color.primary.text};
+  
+    &:active { background-color: ${({ theme }) => theme.button.color.primary.active}; }
   }
 
   &.secondary {
     background-color: ${({ theme }) => theme.button.color.secondary.normal};
     color: ${({ theme }) => theme.button.color.secondary.text};
   
-    &:active {
-      background-color: ${({ theme }) => theme.button.color.secondary.active};
-    }
+    &:active { background-color: ${({ theme }) => theme.button.color.secondary.active}; }
   }
 
   &.large {
@@ -64,6 +67,12 @@ const StyledButton = styled.button`
   }
 `;
 
+function getStyleClassName({ primary, secondary }) {
+  if (primary) return 'primary';
+  if (secondary) return 'secondary';
+  return ''
+}
+
 function getSizeClassName({ large, small, tiny }) {
   if (large) return 'large';
   if (small) return 'small';
@@ -71,10 +80,10 @@ function getSizeClassName({ large, small, tiny }) {
   return '';
 }
 
-function IconButton({ icon, secondary, ...props }) {
+function IconButton({ icon, ...props }) {
   return (
     <StyledButton
-      className={`${secondary ? 'secondary' : ''} ${getSizeClassName(props)}`}
+      className={`${getStyleClassName(props)} ${getSizeClassName(props)}`}
       onClick={(event) => props.onClick(event)}
       {...props}
     >
@@ -86,6 +95,7 @@ function IconButton({ icon, secondary, ...props }) {
 IconButton.propTypes = {
   type: PropTypes.string,
   onClick: PropTypes.func,
+  primary: PropTypes.bool,
   secondary: PropTypes.bool,
   large: PropTypes.bool,
   small: PropTypes.bool,
@@ -95,6 +105,7 @@ IconButton.propTypes = {
 IconButton.defaultProps = {
   type: 'button',
   onClick: () => {},
+  primary: false,
   secondary: false,
   large: false,
   small: false,
