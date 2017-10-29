@@ -26,12 +26,6 @@ export default function Main({ restaurant, isModalOpen, onModalOpen, onModalClos
         </ChosenRestaurant>
       }
       <Button
-        primary
-        onClick={onRandomize}
-      >
-        Randomize
-      </Button>
-      <Button
         tiny
         onClick={onModalOpen}
       >

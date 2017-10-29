@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Main from './Main';
 import base from '../../../../services/rebase';
+import { Loader } from '../../../../components/Styled/Loader';
 
 function makeChosenRestaurant(restaurant) {
   return {
@@ -11,6 +12,7 @@ function makeChosenRestaurant(restaurant) {
 
 export default class MainContainer extends Component {
   state = {
+    isLoading: true,
     isModalOpen: false,
     chosenRestaurant: null,
     restaurantList: [],
@@ -36,10 +38,14 @@ export default class MainContainer extends Component {
           )).getTime();
 
         if (!chosenRestaurant || chosenRestaurant[0].createdAt < todayTimestamp) {
+          this.randomizeRestaurant();
           return;
         }
 
-        this.setState({ chosenRestaurant: chosenRestaurant[0] });
+        this.setState({
+          chosenRestaurant: chosenRestaurant[0],
+          isLoading: false,
+        });
       }
     });
     base.bindToState('restaurants', {
@@ -91,6 +97,10 @@ export default class MainContainer extends Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return <Loader />;
+    }
+
     const restaurant = this.state.chosenRestaurant
       ? this.state.chosenRestaurant.restaurant
       : null;
@@ -100,7 +110,6 @@ export default class MainContainer extends Component {
         isModalOpen={this.state.isModalOpen}
         onModalOpen={() => this.handleOpenModal()}
         onModalClose={() => this.handleCloseModal()}
-        onRandomize={() => this.randomizeRestaurant()}
       />
     );
   }
