@@ -1,0 +1,26 @@
+#! /usr/bin/env node
+
+const program = require('commander');
+const merge = require('deepmerge');
+const fs = require('fs');
+
+program
+  .command('config [env]')
+  .description('Generate configuration file')
+  .action((env = 'dev') => {
+    const mainConfig = require('../config/config.json');
+    let envConfig = {};
+    try {
+      envConfig = require(`../config/config.${env}.json`);
+    } catch (e) {}
+
+    const config = merge(mainConfig, envConfig);
+
+    fs.writeFileSync(`${__dirname}/../src/config.json`, JSON.stringify(config, null, 2));
+  });
+
+program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
+}

@@ -1,0 +1,8 @@
+{
+  "firebase": {
+    "projectId": "mloureiro-lunch-time",
+    "authDomain": "mloureiro-lunch-time.firebaseapp.com",
+    "apiKey": "AIzaSyD40BsaCW0wyuPVeLzJ2TkJsuovPO2aaLM",
+    "databaseURL": "https://mloureiro-lunch-time.firebaseio.com"
+  }
+}
