@@ -127,7 +127,7 @@ const modal = {
       radius: '3px',
     },
     color: {
-      background: colors.babyBlue,
+      background: general.color.sheet,
       border: colors.iron,
     },
     padding: '1.5em',
