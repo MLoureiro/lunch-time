@@ -13,10 +13,10 @@ const Wrapper = styled.section`
   justify-content: flex-end;
 `;
 
-const Logo = styled.img`
+const Logo = styled.i.attrs({  className: 'fa fa-cutlery' })`
+  color: #666666;
   width: 20px;
   height: 20px;
-  margin: 0 10px;
 `;
 
 const BrandName = styled.h1`
@@ -30,7 +30,7 @@ const BrandName = styled.h1`
 export default function Footer() {
   return (
     <Wrapper>
-      <Logo src={images.logo} />
+      <Logo />
       <BrandName>LunchTime</BrandName>
     </Wrapper>
   );
