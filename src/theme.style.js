@@ -24,6 +24,12 @@ const colors = {
     dark: '#1c313a',
     text: '#ffffff',
   },
+  danger: {
+    normal: '#d50000',
+    light: '#ff5131',
+    dark: '#9b0000',
+    text: '#ffffff',
+  },
 };
 
 const general = {
@@ -66,6 +72,12 @@ const button = {
       active: colors.secondary.light,
       text: colors.secondary.text,
     },
+    danger: {
+      normal: colors.danger.normal,
+      hover: colors.danger.light,
+      active: colors.danger.dark,
+      text: colors.danger.text,
+    },
     background: colors.white,
     border: colors.iron,
     text: colors.neptune,
@@ -85,6 +97,7 @@ const button = {
     family: general.font.family,
   },
 };
+
 const form = {
   font: general.font,
   color: {
@@ -114,7 +127,7 @@ const modal = {
       radius: '3px',
     },
     color: {
-      background: colors.babyBlue,
+      background: general.color.sheet,
       border: colors.iron,
     },
     padding: '1.5em',

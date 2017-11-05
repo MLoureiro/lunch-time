@@ -1,57 +1,27 @@
 import React, { Component } from 'react';
 import Main from './Main';
-import base from '../../../../services/rebase';
 import { Loader } from '../../../../components/Styled/Loader';
-
-function makeChosenRestaurant(restaurant) {
-  return {
-    restaurant,
-    createdAt: Date.now(),
-  };
-}
+import RestaurantSuggestionRepository from '../../../../services/RestaurantSuggestionRepository';
 
 export default class MainContainer extends Component {
   state = {
     isLoading: true,
     isModalOpen: false,
-    chosenRestaurant: null,
+    restaurantSuggestions: null,
     restaurantList: [],
   };
 
+  async fetchRestaurant() {
+    this.setState({ isLoading: true });
+    const list = await RestaurantSuggestionRepository.getTodaySuggestions();
+    this.setState({
+      isLoading: !list,
+      restaurantSuggestions: list,
+    });
+  }
+
   componentWillMount() {
-    base.listenTo('chosenRestaurants', {
-      context: this,
-      state: 'chosenRestaurant',
-      asArray: true,
-      queries: {
-        limitToLast: 1,
-        orderByChild: 'createdAt',
-      },
-      then: function(chosenRestaurant) {
-        const today = new Date();
-        const todayTimestamp = (
-          new Date(
-            today.getFullYear(),
-            today.getMonth(),
-            today.getDate(),
-            0,0,1,
-          )).getTime();
-
-        if (!chosenRestaurant || chosenRestaurant[0].createdAt < todayTimestamp) {
-          this.randomizeRestaurant();
-          return;
-        }
-
-        this.setState({
-          chosenRestaurant: chosenRestaurant[0],
-          isLoading: false,
-        });
-      }
-    });
-    base.bindToState('restaurants', {
-      context: this,
-      state: 'restaurantList',
-    });
+    this.fetchRestaurant();
   }
 
   handleOpenModal() {
@@ -62,51 +32,14 @@ export default class MainContainer extends Component {
     this.setState({ isModalOpen: false });
   }
 
-  randomizeRestaurant() {
-    if (!this.canRandomizeRestaurants()) {
-      return;
-    }
-
-    let chosen = null;
-    do {
-      chosen = this.getRandomRestaurant();
-    } while (!this.isNewRestaurant(chosen));
-
-    base.push('chosenRestaurants', {
-      data: makeChosenRestaurant(chosen),
-    });
-  }
-
-  canRandomizeRestaurants() {
-    const { restaurantList, chosenRestaurant } = this.state;
-
-    return restaurantList.length > 1
-      || (chosenRestaurant === null && restaurantList.length === 1);
-  }
-
-  isNewRestaurant({ id }) {
-    return !this.state.chosenRestaurant
-      || this.state.chosenRestaurant.restaurant.id !== id;
-  }
-
-  getRandomRestaurant() {
-    const { restaurantList } = this.state;
-    const position = Math.floor(Math.random() * restaurantList.length);
-
-    return restaurantList[position];
-  }
-
   render() {
     if (this.state.isLoading) {
       return <Loader />;
     }
 
-    const restaurant = this.state.chosenRestaurant
-      ? this.state.chosenRestaurant.restaurant
-      : null;
     return (
       <Main
-        restaurant={restaurant}
+        restaurantList={this.state.restaurantSuggestions}
         isModalOpen={this.state.isModalOpen}
         onModalOpen={() => this.handleOpenModal()}
         onModalClose={() => this.handleCloseModal()}

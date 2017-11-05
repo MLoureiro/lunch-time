@@ -23,29 +23,29 @@ const InlineInput = styled.input`
 
 const InlineInputButton = styled.span`
   display: inline-block;
-  background: ${({ theme }) => theme.form.button.color.background};
+  background: ${({ theme }) => theme.button.color.background};
   font-weight: bolder;
-  height: ${({ theme }) => theme.form.button.height};
+  height: ${({ theme }) => theme.button.height};
   margin-left: -1px;
-  padding: .5em 1em 0;
+  padding: .45em 1em;
   border:
-    ${({ theme }) => theme.form.button.border.thickness}
+    ${({ theme }) => theme.button.border.thickness}
     solid
-    ${({ theme }) => theme.form.button.color.border};
-  border-top-right-radius: ${({ theme }) => theme.form.button.border.radius};
-  border-bottom-right-radius: ${({ theme }) => theme.form.button.border.radius};
+    ${({ theme }) => theme.button.color.border};
+  border-top-right-radius: ${({ theme }) => theme.button.border.radius};
+  border-bottom-right-radius: ${({ theme }) => theme.button.border.radius};
   user-select: none;
 
   &:hover {
-    color: ${({ theme }) => theme.form.button.color.hover.text};
-    background-color: ${({ theme }) => theme.form.button.color.hover.background};
-    border-color: ${({ theme }) => theme.form.button.color.hover.border};
+    color: ${({ theme }) => theme.button.color.hover.text};
+    background-color: ${({ theme }) => theme.button.color.hover.background};
+    border-color: ${({ theme }) => theme.button.color.hover.border};
   }
 
   &:active {
-    color: ${({ theme }) => theme.form.button.color.active.text};
-    background-color: ${({ theme }) => theme.form.button.color.active.background};
-    border-color: ${({ theme }) => theme.form.button.color.active.border};
+    color: ${({ theme }) => theme.button.color.active.text};
+    background-color: ${({ theme }) => theme.button.color.active.background};
+    border-color: ${({ theme }) => theme.button.color.active.border};
   }
 `;
 

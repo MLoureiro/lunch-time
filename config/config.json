@@ -1,2 +1,5 @@
 {
+  "restaurants": {
+    "suggestionsPerDay": 3
+  }
 }

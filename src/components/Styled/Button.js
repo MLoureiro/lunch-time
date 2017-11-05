@@ -49,6 +49,20 @@ const StyledButton = styled.button`
 
     &:active { background-color: ${({ theme }) => theme.button.color.secondary.active}; }
   }
+  
+  &.danger {
+    color: ${({ theme }) => theme.button.color.danger.active};
+
+    &:hover {
+      color: ${({ theme }) => theme.button.color.danger.text}; 
+      background-color: ${({ theme }) => theme.button.color.danger.hover}; 
+    }
+    
+    &:active { 
+      color: ${({ theme }) => theme.button.color.danger.text}; 
+      background-color: ${({ theme }) => theme.button.color.danger.active}; 
+    }
+  }
 
   &.large {
     padding: .5em 1.2em;
@@ -64,9 +78,10 @@ const StyledButton = styled.button`
   }
 `;
 
-function getStyleClassName({ primary, secondary }) {
+function getStyleClassName({ primary, secondary, danger }) {
   if (primary) return 'primary';
   if (secondary) return 'secondary';
+  if (danger) return 'danger';
   return ''
 }
 
@@ -94,6 +109,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
+  danger: PropTypes.bool,
   large: PropTypes.bool,
   small: PropTypes.bool,
   tiny: PropTypes.bool,
@@ -104,6 +120,7 @@ Button.defaultProps = {
   onClick: () => {},
   primary: false,
   secondary: false,
+  danger: false,
   success: false,
   large: false,
   small: false,

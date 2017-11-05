@@ -38,9 +38,10 @@ const StyledButton = styled(Button)`
   }
 `;
 
-function getStyleClassName({ primary, secondary }) {
+function getStyleClassName({ primary, secondary, danger }) {
   if (primary) return 'primary';
   if (secondary) return 'secondary';
+  if (danger) return 'danger';
   return ''
 }
 
@@ -64,10 +65,12 @@ function IconButton({ icon, ...props }) {
 }
 
 IconButton.propTypes = {
+  icon: PropTypes.string.isRequired,
   type: PropTypes.string,
   onClick: PropTypes.func,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
+  danger: PropTypes.bool,
   large: PropTypes.bool,
   small: PropTypes.bool,
   tiny: PropTypes.bool,
@@ -78,6 +81,7 @@ IconButton.defaultProps = {
   onClick: () => {},
   primary: false,
   secondary: false,
+  danger: false,
   large: false,
   small: false,
   tiny: false,

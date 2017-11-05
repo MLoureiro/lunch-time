@@ -13,18 +13,18 @@ const Wrapper = styled.section`
   background-color: ${({ theme }) => (theme.general.color.sheet)};
 `;
 
-const ChosenRestaurant = styled.h1`
-  font-size: 5em;
+const ChosenRestaurant = styled.p`
+  font-size: 2em;
 `;
 
-export default function Main({ restaurant, isModalOpen, onModalOpen, onModalClose, onRandomize }) {
+export default function Main({ restaurantList, isModalOpen, onModalOpen, onModalClose, onRandomize }) {
   return (
     <Wrapper>
-      {restaurant &&
-        <ChosenRestaurant>
+      {restaurantList && restaurantList.map(restaurant => (
+        <ChosenRestaurant key={restaurant.id}>
           {restaurant.name}
         </ChosenRestaurant>
-      }
+      ))}
       <Button
         tiny
         onClick={onModalOpen}

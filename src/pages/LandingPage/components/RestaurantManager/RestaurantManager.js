@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { InputWithButton } from '../../../../components/Styled/InputWithButton';
-import { Button } from '../../../../components/Styled/Button';
+import { IconButton } from '../../../../components/Styled/IconButton';
 
 const List = styled.ul`
   list-style: none;
@@ -31,24 +31,6 @@ const ListItem = styled.li`
   }
 `;
 
-const DeleteButton = styled(Button).attrs({
-  children: 'X',
-  type: 'button',
-})`
-  margin: 0;
-  padding: .25em .5em;
-  border-radius: 50%;
-  font-weight: bolder;
-  color: #C10000;
-  background-color: white;
-  
-  &:hover {
-    color: white;
-    background-color: #C10000;
-    border-color: #C10000;
-  }
-`;
-
 export default function RestaurantManager({ restaurants, onAdd, onRemove }) {
   return (
     <div>
@@ -56,7 +38,12 @@ export default function RestaurantManager({ restaurants, onAdd, onRemove }) {
         {restaurants.map(restaurant => (
           <ListItem key={restaurant.id}>
             {restaurant.name}
-            <DeleteButton onClick={() => onRemove(restaurant)} />
+            <IconButton
+              icon="times"
+              small
+              danger
+              onClick={() => onRemove(restaurant)}
+            />
           </ListItem>
         ))}
       </List>
