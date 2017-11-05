@@ -46,7 +46,8 @@ class RestaurantRepository {
         callback(list || []);
       });
 
-    return { off: () => listener.off()};
+
+    return { off: () => this.database.off('value', listener)};
   }
 
   static _mapToRestaurant(list) {
