@@ -1,11 +1,8 @@
 import firebase from 'firebase';
 import Rebase from 're-base';
+import { firebase as config } from '../config.json';
 
-const app = firebase.initializeApp({
-  apiKey: 'AIzaSyD40BsaCW0wyuPVeLzJ2TkJsuovPO2aaLM',
-  authDomain: "mloureiro-lunch-time.firebaseapp.com",
-  databaseURL: 'https://mloureiro-lunch-time.firebaseio.com',
-});
+const app = firebase.initializeApp(config);
 
 const db = firebase.database(app);
 const base = Rebase.createClass(db);
