@@ -14,7 +14,7 @@
     "styled-components": "^2.2.1"
   },
   "scripts": {
-    "deploy": "bin/generate config prod && npm run build && gh-pages -d build",
+    "deploy": "bin/generate config prod && npm run build && gh-pages -d build && bin/generate config dev",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
