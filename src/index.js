@@ -18,21 +18,6 @@ const AppWrapper = styled.section`
   font-size: ${({ theme }) => theme.general.font.size};
 `;
 
-function RouteOnlyAuthenticated({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={renderProps => (
-        isAuthenticated() ? (
-          <Component />
-        ) : (
-          <Redirect to="/login" />
-        )
-      )}
-    />
-  );
-}
-
 function LoginRoute () {
   return (
     <Route
@@ -50,26 +35,12 @@ function LoginRoute () {
 }
 
 class App extends Component {
-  state = { uid: null };
-
-  componentDidMount() {
-    this.setState({ uid: userIdManager.get() });
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        userIdManager.set(user.uid);
-        this.setState({ uid: user.uid });
-      } else {
-        userIdManager.remove(user);
-        this.setState({ uid: null });
-      }
-    });
-  }
 
   render() {
     return (
       <AppWrapper>
         <Switch>
-          <RouteOnlyAuthenticated exact path="/" component={LandingPage} />
+          <Route exact path="/" component={LandingPage} />
           <LoginRoute />
           <Redirect to="/" />
         </Switch>
