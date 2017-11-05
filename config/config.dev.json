@@ -6,6 +6,7 @@
     "databaseURL": "https://mloureiro-lunch-time-dev.firebaseio.com"
   },
   "restaurants": {
+    "suggestionsPerDay": 2,
     "currentTeamId": "-Ky82AAlSBFRaa49BEo_"
   }
 }
