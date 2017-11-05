@@ -4,5 +4,8 @@
     "authDomain": "mloureiro-lunch-time-dev.firebaseapp.com",
     "apiKey": "AIzaSyAWFt7uVnJmNifXTAI9lWijgQHMNPzJnB4",
     "databaseURL": "https://mloureiro-lunch-time-dev.firebaseio.com"
+  },
+  "restaurants": {
+    "currentTeamId": "-Ky82AAlSBFRaa49BEo_"
   }
 }
