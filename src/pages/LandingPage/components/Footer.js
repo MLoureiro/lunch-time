@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
 
-const images = {
-  logo: require('../../../components/images/logo.svg')
-};
-
 const Wrapper = styled.section`
   display: flex;
   height: 40px;
