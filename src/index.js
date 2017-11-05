@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import NotFound from './pages/NotFound';
 import registerServiceWorker from './registerServiceWorker';
 import theme from './theme.style';
+import { app as config } from './config.json';
 import './index.css';
 
 const AppWrapper = styled.section`
@@ -33,7 +34,7 @@ class App extends Component {
 }
 
 const app = (
-  <BrowserRouter>
+  <BrowserRouter basename={config.basePath}>
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>

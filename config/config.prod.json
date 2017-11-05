@@ -1,4 +1,7 @@
 {
+  "app": {
+    "basePath": "lunch-time"
+  },
   "firebase": {
     "projectId": "mloureiro-lunch-time",
     "authDomain": "mloureiro-lunch-time.firebaseapp.com",
