@@ -1,4 +1,4 @@
-import { app } from './rebase';
+import { app } from './firebase';
 
 class TeamRepository {
   database;

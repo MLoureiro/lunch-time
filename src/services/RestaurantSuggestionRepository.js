@@ -1,4 +1,4 @@
-import { app } from './rebase';
+import { app } from './firebase';
 import RestaurantRepository from './RestaurantRepository';
 import { restaurants as config } from '../config.json';
 
